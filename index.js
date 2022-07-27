@@ -1,4 +1,5 @@
 // test
+import * as core from '@actions/core';
 const { execSync, spawn } = require('child_process');
 const { existsSync } = require('fs');
 const { EOL } = require('os');
@@ -191,7 +192,7 @@ const workspace = process.env.GITHUB_WORKSPACE;
     console.log('newVersion 2:', newVersion);
     newVersion = `${tagPrefix}${newVersion}`;
     console.log(`newVersion after merging tagPrefix+newVersion: ${newVersion}`);
-    console.log(`::set-output name=newTag::${newVersion}`);
+    core.setOutput('newTag', newVersion);
     try {
       // to support "actions/checkout@v1"
       if (process.env['INPUT_SKIP-COMMIT'] !== 'true') {
